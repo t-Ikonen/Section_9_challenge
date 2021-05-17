@@ -26,16 +26,14 @@ int main()
         cout << "M Mean value of vector" << endl;
         cout << "S Smallest in vector" << endl;
         cout << "L Largest number in vector" << endl;
-        cout << "Q Quit" << endl;
+        cout << "Q Quit" << endl << endl;
 
         cin >> valinta;
 
-        if (valinta != 'Q' and valinta != 'q')
+        if (valinta != 'Q' and valinta != 'q')  //muu kuin q/Q annettu
         {
 
-            cout << "muu kuin q" << endl;
-
-            switch (valinta)
+           switch (valinta)
             {
             case 'P':
             case'p':
@@ -56,7 +54,7 @@ int main()
                 break;
 
             case 'A':
-            case 'a' :
+            case 'a':
                 
                 int input_luku;
                 cout << "Anna numero vektoriin: " << endl;
@@ -66,8 +64,34 @@ int main()
                 break;
 
             case 'M':
-            case 'm' :
-                cout << "m valitu";
+            case 'm':
+                cout << "\n\n\n M valitu" << endl;
+
+                
+
+                if (vec.size() > 1)
+                {
+
+                        float summa = 0.0;
+                        float avg = 0.0;
+                                       
+                        for (unsigned i = 0; i < vec.size(); i++) //lasketaan keskiarvo joo joo
+                        {
+                           
+
+                           summa = summa + vec[i];
+                           avg = summa / vec.size();
+                        }
+                        
+                        cout << "\nKeskiarvo: " << avg << endl;
+                }
+                
+                else
+                {
+                    cout << "Pitaa olla vahintaan kaksi numeroa vektorissa keskiarvoa varten" << endl;
+                }
+                
+
                 break;
 
             case 'S':
@@ -84,6 +108,7 @@ int main()
 
             default:
                 cout << "Ei validi valinta!" << endl;
+                break;
             }
 
         }
