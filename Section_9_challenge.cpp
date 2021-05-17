@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <conio.h>
+#include <algorithm>
 
 using namespace std;
 
@@ -33,29 +34,26 @@ int main()
         if (valinta != 'Q' and valinta != 'q')  //muu kuin q/Q annettu
         {
 
-           switch (valinta)
+            switch (valinta)
             {
             case 'P':
             case'p':
-               // cout << "p valitu"<<endl;
-
                 if (vec.size() > 0)
                 {
-
                     for (auto numerot : vec)
                     {
                         cout << numerot << " ";
                     }
-                    // cout << "\n\n------- p loppu --------" << endl;
                 }
                 else
+                {
                     cout << "\n\nTyhjaa taynna" << endl;
-
+                }
                 break;
 
             case 'A':
             case 'a':
-                
+
                 int input_luku;
                 cout << "Anna numero vektoriin: " << endl;
                 cin >> input_luku;
@@ -65,68 +63,88 @@ int main()
 
             case 'M':
             case 'm':
-                cout << "\n\n\n M valitu" << endl;
-
-                
-
                 if (vec.size() > 1)
                 {
 
-                        float summa = 0.0;
-                        float avg = 0.0;
-                                       
-                        for (unsigned i = 0; i < vec.size(); i++) //lasketaan keskiarvo joo joo
-                        {
-                           
+                    float summa = 0.0;
+                    float avg = 0.0;
 
-                           summa = summa + vec[i];
-                           avg = summa / vec.size();
-                        }
-                        
-                        cout << "\nKeskiarvo: " << avg << endl;
+                    for (unsigned i = 0; i < vec.size(); i++) //lasketaan keskiarvo 
+                    {
+                        summa = summa + vec[i];
+                        avg = summa / vec.size();
+                    }
+                    cout << "\nKeskiarvo: " << avg << endl;
                 }
-                
                 else
                 {
                     cout << "Pitaa olla vahintaan kaksi numeroa vektorissa keskiarvoa varten" << endl;
                 }
-                
-
                 break;
 
             case 'S':
-            case 's' :
-                cout << "s valitu";
+            case 's':
+
+                if (vec.size() > 0)
+                {
+                    cout << "s small valitu" << endl;
+                    cout << "\nMin Element = " << *min_element(vec.begin(), vec.end());
+                }
+
+                else
+                {
+                    cout << "vektori tyhja" << endl;
+                }
                 break;
 
             case 'L':
-            case 'l' :
-                cout << "l valitu";
+            case 'l':
+
+                if (vec.size() > 1)
+                {
+                    int max = vec[0];
+                    for (unsigned i=0 ; i < vec.size(); i++)
+                    {
+                        if (vec[i] > max)
+                        {
+                            max = vec[i];
+                        }
+                        else
+                        {
+                            max = max;
+                        }
+                    }
+                    cout << "Maksimi: " << max<<endl;
+                }
+                else
+                {
+                    if (vec.size() == 1)
+                    {
+                        cout << "Maks arvo vektorissa: " << vec[0];
+                    }
+                    else
+                    {
+                        cout << "vektori tyhja" << endl;
+                    }
+
+                }
                 break;
-
-
 
             default:
                 cout << "Ei validi valinta!" << endl;
                 break;
+
             }
-
         }
-
+        
         else
         {
-            cout << "\n\n\t\t\tTHE END"<< endl;
+            cout << "\n\n\t\t\tTHE END" << endl;
             jatkuu = false;
-
         }
-
-
-    }     while (jatkuu);
-
-
-
-    // clrscr();
-
+               
+        
+    } while (jatkuu);
 
 
     return 0;
