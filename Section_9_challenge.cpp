@@ -19,6 +19,9 @@ int main()
 {
     std::cout << "++++++++++ section 9 ++++++++++++\n\n";
 
+    cout << "++++++++++ functioilla ++++++++++++\n\n";
+    cout << "++++++++++ Section 9 challenge ++++++++++++\n\n";
+
     bool jatkuu(true);
 
     vector <int> vec{};
