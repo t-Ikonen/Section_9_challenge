@@ -4,8 +4,16 @@
 #include <iostream>
 #include <vector>
 #include <conio.h>
+#include <algorithm>
 
 using namespace std;
+
+char print_menu();
+void print_vector(const vector<int> v);
+void add_number(vector<int> &vec);
+double calc_avarage(const vector<int> v);
+void print_smallest(const vector<int> v);
+void print_max(const vector<int> v);
 
 int main()
 {
@@ -15,93 +23,57 @@ int main()
 
     vector <int> vec{};
 
-
-    // loop so lon that Q or q changes selection to be false
+    // loop so long that Q or q changes selection to be false
     do {
 
-        char valinta;
+        char valinta =print_menu();
 
-        cout << "\nP print numbers" << endl;
-        cout << "A Add numebrs to vector" << endl;
-        cout << "M Mean value of vector" << endl;
-        cout << "S Smallest in vector" << endl;
-        cout << "L Largest number in vector" << endl;
-        cout << "Q Quit" << endl;
-
-        cin >> valinta;
-
-        if (valinta != 'Q' and valinta != 'q')
+        if (toupper(valinta) != 'Q')  //muu kuin q/Q annettu
         {
-
-            cout << "muu kuin q" << endl;
-
-            switch (valinta)
+            switch (toupper(valinta))
             {
             case 'P':
-            case'p':
-               // cout << "p valitu"<<endl;
-
-                if (vec.size() > 0)
-                {
-
-                    for (auto numerot : vec)
-                    {
-                        cout << numerot << " ";
-                    }
-                    // cout << "\n\n------- p loppu --------" << endl;
-                }
-                else
-                    cout << "\n\nTyhjaa taynna" << endl;
-
+                print_vector(vec);
                 break;
 
             case 'A':
-            case 'a' :
-                
-                int input_luku;
-                cout << "Anna numero vektoriin: " << endl;
-                cin >> input_luku;
-                vec.push_back(input_luku);
-                cout << input_luku << " lisatty" << endl;
+                add_number(vec);
                 break;
 
             case 'M':
-            case 'm' :
-                cout << "m valitu";
+           
+               // double avg{};
+               // avg = calc_avarage(vec);
+                cout << "Mean value is: " << calc_avarage(vec) << endl;
                 break;
 
             case 'S':
-            case 's' :
-                cout << "s valitu";
+            //case 's':
+
+                print_smallest(vec);
                 break;
 
             case 'L':
-            case 'l' :
-                cout << "l valitu";
+            //case 'l':
+
+                print_max(vec);
                 break;
-
-
 
             default:
                 cout << "Ei validi valinta!" << endl;
+                break;
+
             }
-
         }
-
+        
         else
         {
-            cout << "\n\n\t\t\tTHE END"<< endl;
+            cout << "\n\n\t\t\tTHE END" << endl;
             jatkuu = false;
-
         }
-
-
-    }     while (jatkuu);
-
-
-
-    // clrscr();
-
+               
+        
+    } while (jatkuu);
 
 
     return 0;
@@ -117,3 +89,93 @@ int main()
 //   4. Use the Error List window to view errors
 //   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
 //   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+
+char print_menu()
+{
+    char valinta{ ' ' };
+    cout << "\nP print numbers" << endl;
+    cout << "A Add numebrs to vector" << endl;
+    cout << "M Mean value of vector" << endl;
+    cout << "S Smallest in vector" << endl;
+    cout << "L Largest number in vector" << endl;
+    cout << "Q Quit" << endl << endl;
+
+    cin >> valinta;
+    
+    return valinta;
+}
+
+void print_vector(const vector<int> vec)
+{
+    if (vec.size() == 0)
+        cout << "tyhjaa taynna" << endl;
+
+    else
+    {
+        for (auto numerot : vec) {
+            cout << numerot << " ";
+        }
+    }
+}
+
+void add_number(vector<int> &vec) {
+    int input_luku;
+    cout << "Anna numero vektoriin: " << endl;
+    cin >> input_luku;
+    vec.push_back(input_luku);
+    cout << input_luku << " lisatty" << endl;
+}
+
+double calc_avarage(const vector<int> v) {
+
+    if (v.size() > 0) {
+        int summa{};
+        
+        for (auto num : v)
+            summa += num;
+
+        cout << "summa: " << summa << " maara: " << v.size() << endl;
+        return (static_cast<double>(summa) / v.size());
+    }
+    else
+    {
+        return 0;
+    }
+    
+}
+
+void print_smallest(const vector<int> v)
+{
+    if (v.size() > 0)  {
+        cout << "s small valitu" << endl;
+        cout << "\nMin Element = " << *min_element(v.begin(), v.end());
+    }
+
+    else {
+        cout << "vektori tyhja" << endl;
+    }
+}
+
+void print_max(const vector<int> v)
+{
+    if (v.size() > 1)
+    {
+        int max = v.at(0);
+        for (unsigned i = 0; i < v.size(); i++) {
+            if (v[i] > max)
+            {
+                max = v[i];
+            }
+        }
+        cout << "Maksimi: " << max << endl;
+    }
+    else
+    {
+        if (v.size() == 1)  {
+            cout << "Maks arvo vektorissa: " << v[0];
+        }
+        else {
+            cout << "vektori tyhja" << endl;
+        }
+    }
+}
